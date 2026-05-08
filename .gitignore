@@ -1,0 +1,20 @@
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local projects to exclude
+html/
+LeetCode/
+
+# Misc
+.clang-format
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
