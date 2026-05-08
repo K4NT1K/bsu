@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Flashcards</title>
+</head>
+<body>
+<h1>Flashcards</h1>
+
+<section class="top-panel">
+    <form class="create-form">
+        <textarea id="question" placeholder="Enter a question" rows="3" maxlength="200"></textarea>
+        <textarea id="answer" placeholder="Answer" rows="3" maxlength="200"></textarea>
+        <input type="button" id="create" value="CREATE">
+    </form>
+
+    <div class="deck-panel">
+        <div class="deck-panel-header">Decks</div>
+        <div class="deck-controls">
+            <input type="text" id="deckName" placeholder="New deck name" maxlength="40">
+            <input type="button" id="createDeck" value="Add deck">
+        </div>
+        <div id="deckList" class="deck-list"></div>
+    </div>
+</section>
+
+<section class="workspace">
+    <div id="learn" class="learn-panel">
+        <div class="study-toolbar">
+            <div class="mode-switch">
+                <input type="radio" name="studyMode" id="modeAll" value="all" checked>
+                <label for="modeAll">All</label>
+
+                <input type="radio" name="studyMode" id="modeUnlearned" value="unlearned">
+                <label for="modeUnlearned">Unlearned</label>
+            </div>
+
+            <input type="button" id="shuffle" value="Shuffle">
+        </div>
+
+        <div id="cardContainer"></div>
+
+        <div class="current-card-actions">
+            <label class="learn-toggle">
+                <input type="checkbox" id="currentLearned">
+                <span>Learned</span>
+            </label>
+
+            <input type="button" id="editCurrent" value="Edit">
+            <input type="button" id="deleteCurrent" value="Delete">
+        </div>
+
+        <div class="card-nav">
+            <input type="button" id="previous" value="🢀">
+            <input type="button" id="flip" value="⭯">
+            <input type="button" id="next" value="🢂">
+        </div>
+    </div>
+
+    <aside class="table-panel">
+        <div class="table-panel-header">
+            <span>Cards in deck</span>
+            <input type="button" id="hide" value="Hide">
+        </div>
+        <table id="cards"></table>
+    </aside>
+</section>
+
+<script src="storage-manager.js"></script>
+<script src="state-manager.js"></script>
+<script src="ui.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

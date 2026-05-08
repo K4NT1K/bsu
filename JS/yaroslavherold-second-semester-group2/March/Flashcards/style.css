@@ -1,0 +1,523 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    padding: 32px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:
+            radial-gradient(circle at top left, rgba(88, 28, 135, 0.35), transparent 30%),
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.25), transparent 35%),
+            linear-gradient(135deg, #0b1120 0%, #111827 45%, #1e1b4b 100%);
+    color: #e5e7eb;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 26px;
+    background: linear-gradient(90deg, #dbeafe 0%, #c4b5fd 50%, #93c5fd 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.top-panel,
+.workspace {
+    width: min(1400px, 100%);
+    display: grid;
+    gap: 20px;
+}
+
+.top-panel {
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 20px;
+}
+
+.workspace {
+    grid-template-columns: 1.35fr 1fr;
+    align-items: start;
+}
+
+.create-form,
+.deck-panel,
+.learn-panel,
+.table-panel {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    border-radius: 26px;
+    animation: fadeUp 0.45s ease;
+}
+
+.create-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px;
+}
+
+#question,
+#answer,
+#deckName {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    background: rgba(17, 24, 39, 0.75);
+    color: #f9fafb;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+#question,
+#answer {
+    flex: 1 1 320px;
+    min-height: 120px;
+    padding: 18px 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+#deckName {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 0.98rem;
+}
+
+#question::placeholder,
+#answer::placeholder,
+#deckName::placeholder {
+    color: rgba(229, 231, 235, 0.45);
+}
+
+#question:focus,
+#answer:focus,
+#deckName:focus {
+    border-color: rgba(129, 140, 248, 0.8);
+    background: rgba(17, 24, 39, 0.95);
+    box-shadow:
+            0 0 0 4px rgba(99, 102, 241, 0.18),
+            0 10px 25px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+}
+
+#create,
+#createDeck,
+#hide,
+#shuffle,
+#previous,
+#flip,
+#next,
+#editCurrent,
+#deleteCurrent,
+td button {
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+#create,
+#createDeck {
+    padding: 15px 24px;
+    min-width: 150px;
+    background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.28);
+}
+
+#create:hover,
+#createDeck:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(79, 70, 229, 0.36);
+}
+
+.deck-panel {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.deck-panel-header,
+.table-panel-header span {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #dbeafe;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.deck-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.deck-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.deck-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.25s ease;
+}
+
+.deck-item:hover,
+.deck-item.active {
+    background: rgba(79, 70, 229, 0.22);
+    border-color: rgba(129, 140, 248, 0.32);
+    transform: translateY(-1px);
+}
+
+.learn-panel {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 100%;
+}
+
+.study-toolbar,
+.current-card-actions,
+.card-nav,
+.table-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mode-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mode-switch input[type="radio"] {
+    display: none;
+}
+
+.mode-switch label {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #f8fafc;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.mode-switch input[type="radio"]:checked + label {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.85), rgba(37, 99, 235, 0.85));
+    border-color: rgba(147, 197, 253, 0.45);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+}
+
+#shuffle,
+#hide,
+#previous,
+#flip,
+#next,
+#editCurrent,
+#deleteCurrent {
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+#shuffle:hover,
+#hide:hover,
+#previous:hover,
+#flip:hover,
+#next:hover,
+#editCurrent:hover,
+#deleteCurrent:hover,
+td button:hover {
+    background: rgba(79, 70, 229, 0.35);
+    border-color: rgba(129, 140, 248, 0.35);
+    transform: translateY(-2px);
+}
+
+#cardContainer {
+    width: 100%;
+}
+
+.card-display {
+    width: 100%;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 34px;
+    border-radius: 24px;
+    background:
+            linear-gradient(135deg, rgba(79, 70, 229, 0.16), rgba(59, 130, 246, 0.14)),
+            rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(129, 140, 248, 0.28);
+    color: #f8fafc;
+    text-align: center;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    font-weight: 600;
+    line-height: 1.5;
+    word-break: break-word;
+    white-space: pre-wrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.card-display:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(147, 197, 253, 0.45);
+}
+
+.learn-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.learn-toggle input {
+    width: 18px;
+    height: 18px;
+    accent-color: #6366f1;
+}
+
+.table-panel {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+tr {
+    transition: background 0.25s ease;
+}
+
+tr:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+td {
+    padding: 16px 14px;
+    color: #e5e7eb;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1.4;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+td:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+td input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #6366f1;
+    cursor: pointer;
+}
+
+td button {
+    padding: 9px 13px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f9fafb;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.92rem;
+}
+
+tr.learned {
+    opacity: 0.68;
+    background: rgba(34, 197, 94, 0.10);
+}
+
+tr.learned td {
+    color: #86efac;
+}
+
+.card-display.learned {
+    background:
+            linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.14)),
+            rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(74, 222, 128, 0.45);
+}
+
+.card-display.learned::after {
+    content: "Learned";
+    display: inline-block;
+    margin: 18px 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.18);
+    color: #86efac;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.deck-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.deck-open-btn,
+.deck-delete-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.deck-open-btn {
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    color: white;
+}
+
+.deck-open-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+.deck-open-btn:active {
+    transform: scale(0.96);
+}
+
+.deck-delete-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.deck-delete-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 18px rgba(220, 38, 38, 0.35);
+}
+
+.deck-delete-btn:active {
+    transform: scale(0.96);
+}
+
+.deck-delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1100px) {
+    .top-panel,
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 20px 12px 30px;
+    }
+
+    .create-form,
+    .deck-panel,
+    .learn-panel,
+    .table-panel {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .card-display {
+        min-height: 220px;
+        padding: 24px 18px;
+    }
+
+    #create,
+    #createDeck,
+    #shuffle,
+    #hide,
+    #previous,
+    #flip,
+    #next,
+    #editCurrent,
+    #deleteCurrent {
+        width: 100%;
+    }
+
+    .current-card-actions,
+    .card-nav,
+    .table-panel-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Simon Says</title>
+</head>
+<body>
+<div class="game-container">
+    <div class="game-panel">
+        <div class="header">
+            <div class="score-box">
+                <span>УРОВЕНЬ</span>
+                <div class="score-value" id="currentLevelDisplay">0</div>
+            </div>
+            <div class="best-box">
+                <span>🏆 РЕКОРД</span>
+                <div class="best-value" id="bestScoreDisplay">0</div>
+            </div>
+        </div>
+
+        <div class="board" id="gameBoard"></div>
+
+        <div class="info-area">
+            <div class="message" id="statusMessage">Нажми СТАРТ</div>
+        </div>
+
+        <div class="controls">
+            <button class="ctrl-btn" id="startGameBtn">▶ СТАРТ</button>
+            <button class="ctrl-btn reset-btn" id="newGameBtn">🔄 НОВАЯ ИГРА</button>
+        </div>
+
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<style>
+    * {
+        font-family: Arial, sans-serif;
+    }
+
+    input {
+        width: 40pt;
+    }
+</style>
+<body>
+<h1>Calculator</h1>
+
+<input type="number" value="5" id="aaa"/>
+<input type="number" value="2" id="bbb"/>
+<input type="button" value="=" id="calc"/>
+
+<p id="ccc"></p>
+</body>
+<script>
+    calc.addEventListener('click', handleCalc)
+
+    function handleCalc() {
+        let x = aaa.value
+        let y = bbb.value
+        let result = Number(x) + Number(y);
+        ccc.innerText = result;
+        // counter++
+        // console.log('click' + counter);
+    }
+</script>
+</html>

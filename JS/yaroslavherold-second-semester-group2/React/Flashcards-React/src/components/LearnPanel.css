@@ -1,0 +1,124 @@
+.learn-panel {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    border-radius: 26px;
+    animation: fadeUp 0.45s ease;
+}
+
+.study-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mode-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mode-switch input[type="radio"] {
+    display: none;
+}
+
+.mode-switch label {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #f8fafc;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.mode-switch input[type="radio"]:checked + label {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.85), rgba(37, 99, 235, 0.85));
+    border-color: rgba(147, 197, 253, 0.45);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+}
+
+#shuffle {
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+#shuffle:hover {
+    background: rgba(79, 70, 229, 0.35);
+    border-color: rgba(129, 140, 248, 0.35);
+    transform: translateY(-2px);
+}
+
+.card-container {
+    width: 100%;
+}
+
+.current-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.card-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#previous,
+#flip,
+#next {
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+#previous:hover,
+#flip:hover,
+#next:hover {
+    background: rgba(79, 70, 229, 0.35);
+    border-color: rgba(129, 140, 248, 0.35);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

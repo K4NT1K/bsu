@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Game 12</title>
+</head>
+<body>
+<h1>Game 12</h1>
+
+<div class="players-setup">
+    <label for="playerCount">Number of players:</label>
+    <input type="number" id="playerCount" min="2" max="6" value="2">
+    <button id="updatePlayers">Update</button>
+</div>
+
+<div id="gameStatus">Status: Ready to start</div>
+
+<div class="controls">
+    <input type="button" value="Draw" id="draw"/>
+    <input type="button" value="New Game" id="reset"/>
+</div>
+
+<div id="Dice"></div>
+<div id="GameField"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

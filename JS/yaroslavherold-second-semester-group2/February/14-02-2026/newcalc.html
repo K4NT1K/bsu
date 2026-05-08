@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculation</title>
+  <style>
+    *{font-family: Arial, Helvetica, sans-serif}
+    input{width: 30pt;}
+  </style>
+</head>
+<body>
+<h1>Calculation</h1>
+<input type="number" value="5" id="a1" />
++
+<input type="number" value="5" id="a2" />
+<input type="button" value="=" />
+<p id="bbb"></p>
+
+</body>
+<script>
+  let cnt = 0;
+  document.querySelector("input[type='button']").addEventListener('click', handleCalc)
+
+  function handleCalc(){
+    cnt++;
+    let x = document.querySelector("#a1").value;
+    let y = document.querySelector("#a2").value;
+    let rez = Number(x) + Number(y);
+    //document.querySelector("#bbb").innerHTML += "<br> rez " +cnt+ ":" + x + " times 2 = "  +rez;
+      document.querySelector("#bbb").innerHTML += `<br> Attempt ${cnt}: ${x} + ${y} = ${rez}`;
+
+  }
+</script>
+</html>

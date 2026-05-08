@@ -1,0 +1,195 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#draw:hover, #reset:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+#draw {
+    padding: 15px 40px;
+    font-size: 2.2em;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #4CAF50;
+    color: white;
+}
+
+#draw:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#reset {
+    padding: 15px 40px;
+    font-size: 2.2em;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #ff4444;
+    color: white;
+}
+
+.players-setup {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+#playerCount {
+    padding: 10px;
+    font-size: 1.2em;
+    width: 80px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+#updatePlayers {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #4CAF50;
+    color: white;
+}
+
+#gameStatus {
+    font-size: 1.5em;
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+#Dice {
+    font-size: 2.5em;
+    margin: 20px 0;
+    text-align: center;
+    min-height: 100px;
+}
+
+.move-btn {
+    font-size: 0.8em;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #2196F3;
+    color: white;
+}
+
+.move-btn:hover {
+    opacity: 0.9;
+}
+
+.move-btn.secondary {
+    background: #ff9800;
+}
+
+#GameField {
+    font-size: 2em;
+    text-align: center;
+    line-height: 2;
+    background: rgb(243, 243, 243);
+    padding: 30px;
+    border-radius: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+}
+
+.player-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    min-width: 250px;
+    transition: all 0.3s ease;
+}
+
+.player-card.active {
+    border: 4px solid #4CAF50;
+    box-shadow: 0 0 35px #63ea69;
+    transform: scale(1.02);
+}
+
+.player-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.card {
+    background: #4CAF50;
+    color: white;
+    padding: 4px 18px;
+    border-radius: 8px;
+    font-size: 0.8em;
+}
+
+.game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.winner-message {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    font-size: 3em;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

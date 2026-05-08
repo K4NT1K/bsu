@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game 12</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        font-size: 5em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .controls {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #draw {
+        padding: 15px 40px;
+        font-size: 2.2em;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    #reset {
+        padding: 15px 40px;
+        font-size: 2.2em;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        background: #ff4444;
+        color: white;
+    }
+
+    .players-setup {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+
+    #playerCount {
+        padding: 10px;
+        font-size: 1.2em;
+        width: 80px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+    }
+
+    #updatePlayers {
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #4CAF50;
+        color: white;
+    }
+
+    #Dice {
+        font-size: 2.5em;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    #Dice input[type="button"] {
+        font-size: 0.8em;
+        padding: 10px 20px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    #GameField {
+        font-size: 2em;
+        text-align: center;
+        line-height: 2;
+        background: rgb(243, 243, 243);
+        padding: 30px;
+        border-radius: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        max-width: 1200px;
+    }
+
+    .player-card {
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        min-width: 250px;
+    }
+
+    .player-card strong {
+        font-size: 1.2em;
+        color: #333;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .numbers {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .number {
+        background: #4CAF50;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 10px;
+        font-size: 0.8em;
+    }
+</style>
+<body>
+<h1>Game 12</h1>
+
+<div class="players-setup">
+    <label for="playerCount">Number of players:</label>
+    <input type="number" id="playerCount" min="2" max="6" value="2">
+    <button id="updatePlayers">Update</button>
+</div>
+
+<div class="controls">
+    <input type="button" value="Draw" id="draw"/>
+    <input type="button" value="New Game" id="reset"/>
+</div>
+
+<div id="Dice">Ready to play</div>
+<div id="GameField"></div>
+</body>
+<script>
+    const N = 2; // Количество игроков (можно менять)
+    let players = [];
+    let currentPlayer = 0;
+    let dice1 = 0;
+    let dice2 = 0;
+    let canClick = false;
+
+    // Инициализация игры
+    function initGame(playerCount = N) {
+        players = [];
+        for (let i = 0; i < playerCount; i++) {
+            players.push({
+                id: i + 1,
+                cards: [1,2,3,4,5,6,7,8,9,10,11,12],
+                actualCards: [1,2,3,4,5,6,7,8,9,10,11,12]
+            });
+        }
+        currentPlayer = 0;
+        canClick = false;
+        showCards(document.querySelector('#GameField'));
+        document.querySelector('#Dice').innerHTML = 'Ready to play';
+    }
+
+    document.querySelector('#draw').addEventListener('click', handleGo);
+    document.querySelector('#reset').addEventListener('click', () => initGame(players.length));
+    document.querySelector('#updatePlayers').addEventListener('click', () => {
+        const count = parseInt(document.querySelector('#playerCount').value);
+        if (count >= 2 && count <= 6) {
+            initGame(count);
+        } else {
+            alert('Please enter a number between 2 and 6');
+        }
+    });
+
+    initGame();
+
+    function handleGo() {
+        currentPlayer = (currentPlayer + 1) % players.length;
+        dice1 = randNumFromTo(1, 6);
+        dice2 = randNumFromTo(1, 6);
+        canClick = true;
+
+        showDice(document.querySelector("#Dice"));
+    }
+
+    function randNumFromTo(n, N) {
+        return Math.floor(n + Math.random() * (N - n + 1));
+    }
+
+    function showDice(to) {
+        let str = "Player " + players[currentPlayer].id + ": ";
+
+        str += ' <input type="button" value="' + dice1 + '  ' + dice2 + '" ';
+        str += 'onclick="removeCard(' + currentPlayer + ', [' + dice1 + ',' + dice2 + '])" />';
+
+        str += '<input type="button" value="' + (dice1 + dice2) + '" ';
+        str += 'onclick="removeCard(' + currentPlayer + ', ' + (dice1 + dice2) + ')" />';
+
+        to.innerHTML = str;
+    }
+
+    function showCards(to) {
+        to.innerHTML = "";
+
+        players.forEach(player => {
+            const playerDiv = document.createElement('div');
+            playerDiv.className = 'player-card';
+
+            const title = document.createElement('strong');
+            title.textContent = `Player ${player.id}`;
+            playerDiv.appendChild(title);
+
+            const numbersDiv = document.createElement('div');
+            numbersDiv.className = 'numbers';
+
+            player.actualCards.forEach(card => {
+                const span = document.createElement('span');
+                span.className = 'number';
+                span.textContent = card;
+                numbersDiv.appendChild(span);
+            });
+
+            playerDiv.appendChild(numbersDiv);
+            to.appendChild(playerDiv);
+        });
+    }
+
+    function removeCard(playerIndex, cardValue) {
+        if (!canClick) {
+            alert("The other player's turn now!");
+            return;
+        }
+
+        const player = players[playerIndex];
+
+        if (Array.isArray(cardValue)) {
+            player.actualCards = player.actualCards.filter(card => {
+                return !cardValue.includes(card);
+            });
+        } else {
+            player.actualCards = player.actualCards.filter(card => card !== cardValue);
+        }
+
+        canClick = false;
+        showCards(document.querySelector('#GameField'));
+
+        // Проверка на победу
+        if (player.actualCards.length === 0) {
+            setTimeout(() => {
+                alert(`Player ${player.id} wins! 🎉`);
+                initGame(players.length);
+            }, 100);
+        }
+    }
+</script>
+</html>

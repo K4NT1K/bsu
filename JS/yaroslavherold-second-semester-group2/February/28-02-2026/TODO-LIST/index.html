@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO LIST monolite</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        font-size: 5em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .input-container {display: flex; gap: 10px; align-items: stretch;}
+
+    #inputText, #add, #clear {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 1.2em;
+    }
+
+    #inputText {width: 300px;}
+
+    #add, #clear {width: 100px; cursor: pointer;}
+
+    #todolist {
+        list-style: none;
+        margin-top: 30px;
+        width: 400px;
+    }
+
+    #todolist li {
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2em;
+    }
+
+    #todolist li button {
+        padding: 5px 12px;
+        font-size: 0.9em;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .checked {color: gray;}
+</style>
+<body>
+<h2>ToDo List</h2>
+<div class="input-container">
+    <input type="text" id="inputText" placeholder="Enter the task...">
+    <input type="button" value="Add" id="add"/>
+    <input type="button" value="Clear" id="clear"/>
+</div>
+<ul id="todolist"></ul>
+</body>
+<script src="todolist.js"></script>
+</html>
